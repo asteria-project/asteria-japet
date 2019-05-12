@@ -1,4 +1,4 @@
-import { CommonChar, AsteriaError, AsteriaErrorCode, AsteriaLogger, AbstractAsteriaObject } from 'asteria-gaia';
+import { CommonChar, AsteriaError, AsteriaErrorCode, AsteriaLogger, AbstractAsteriaObject, ErrorUtil } from 'asteria-gaia';
 import { AsqlToken } from './AsqlToken';
 import { AsqlTokenType } from './AsqlTokenType';
 import { AsqlTokenBuilder } from '../util/AsqlTokenBuilder';
@@ -88,17 +88,16 @@ export class AsqlParser extends AbstractAsteriaObject {
             if (value.endsWith(AsqlParser.SINGLE_QUOTE) || value.endsWith(AsqlParser.DOUBLE_QUOTE)) {
                 result = value.substr(1, value.length - 2);
             } else {
-                const errorMsg: string = 'asql string operand must end with a quote character';
-                const error: AsteriaError = this.getValueError(errorMsg);
+                const error: AsteriaError = this.getValueError('asql string operand must end with a quote character');
                 LOGGER.fatal(error.toString());
-                throw new SyntaxError(errorMsg);
+                throw ErrorUtil.errorToException(error);
             }
         } else {
             if (value.endsWith(AsqlParser.SINGLE_QUOTE) || value.endsWith(AsqlParser.DOUBLE_QUOTE)) {
-                const errorMsg: string = 'asql number operand must not end with a quote character';
-                const error: AsteriaError = this.getValueError(errorMsg);
+                const error: AsteriaError = 
+                    this.getValueError('asql number operand must not end with a quote character');
                 LOGGER.fatal(error.toString());
-                throw new SyntaxError(errorMsg);
+                throw ErrorUtil.errorToException(error);
             }
             result = Number(value);
         }

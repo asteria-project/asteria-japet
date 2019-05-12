@@ -1,6 +1,6 @@
 import { AsqlToken } from '../lang/AsqlToken';
 import { AsqlFilterDefinition } from '../lang/AsqlFilterDefinition';
-import { FilterCondition, AsteriaLogger, AsteriaErrorCode, CommonChar, FilterDefinition, AbstractAsteriaObject } from 'asteria-gaia';
+import { FilterCondition, AsteriaLogger, AsteriaErrorCode, CommonChar, FilterDefinition, AbstractAsteriaObject, ErrorUtil, AsteriaError } from 'asteria-gaia';
 import { AsqlTokenType } from '../lang/AsqlTokenType';
 import { OuranosLogger, OuranosErrorBuilder } from 'asteria-ouranos';
 
@@ -69,27 +69,27 @@ export class FilterQueryAdapter extends AbstractAsteriaObject {
      */
     private checkAndSetCondition(token: AsqlToken): void {
         const condition: FilterCondition = token.value;
-        let errorString: string = CommonChar.EMPTY;
+        let error: AsteriaError = null;
         if (condition !== FilterCondition.AND && condition !== FilterCondition.OR) {
-            errorString = OuranosErrorBuilder.getInstance().build(
+            error = OuranosErrorBuilder.getInstance().build(
                 AsteriaErrorCode.INVALID_ASQL_CONDITION,
                 this.getClassName(),
                 `filter condition must be AND or OR; found '${condition}'`
-            ).toString();
-            LOGGER.fatal(errorString);
-            throw new SyntaxError(errorString);
+            )
+            LOGGER.fatal(error.toString());
+            throw ErrorUtil.errorToException(error);
         }
         if (!this._condition) {
             this._condition = condition;
         } else {
             if (this._condition !== condition) {
-                errorString = OuranosErrorBuilder.getInstance().build(
+                error = OuranosErrorBuilder.getInstance().build(
                     AsteriaErrorCode.INVALID_ASQL_CONDITION,
                     this.getClassName(),
                     'filters support only one type of condition clause'
-                ).toString();
-                LOGGER.fatal(errorString);
-                throw new SyntaxError(errorString);
+                );
+                LOGGER.fatal(error.toString());
+                throw ErrorUtil.errorToException(error);
             }
         }
     }

@@ -32,20 +32,20 @@ class FilterQueryAdapter extends asteria_gaia_1.AbstractAsteriaObject {
     }
     checkAndSetCondition(token) {
         const condition = token.value;
-        let errorString = asteria_gaia_1.CommonChar.EMPTY;
+        let error = null;
         if (condition !== asteria_gaia_1.FilterCondition.AND && condition !== asteria_gaia_1.FilterCondition.OR) {
-            errorString = asteria_ouranos_1.OuranosErrorBuilder.getInstance().build(asteria_gaia_1.AsteriaErrorCode.INVALID_ASQL_CONDITION, this.getClassName(), `filter condition must be AND or OR; found '${condition}'`).toString();
-            LOGGER.fatal(errorString);
-            throw new SyntaxError(errorString);
+            error = asteria_ouranos_1.OuranosErrorBuilder.getInstance().build(asteria_gaia_1.AsteriaErrorCode.INVALID_ASQL_CONDITION, this.getClassName(), `filter condition must be AND or OR; found '${condition}'`);
+            LOGGER.fatal(error.toString());
+            throw asteria_gaia_1.ErrorUtil.errorToException(error);
         }
         if (!this._condition) {
             this._condition = condition;
         }
         else {
             if (this._condition !== condition) {
-                errorString = asteria_ouranos_1.OuranosErrorBuilder.getInstance().build(asteria_gaia_1.AsteriaErrorCode.INVALID_ASQL_CONDITION, this.getClassName(), 'filters support only one type of condition clause').toString();
-                LOGGER.fatal(errorString);
-                throw new SyntaxError(errorString);
+                error = asteria_ouranos_1.OuranosErrorBuilder.getInstance().build(asteria_gaia_1.AsteriaErrorCode.INVALID_ASQL_CONDITION, this.getClassName(), 'filters support only one type of condition clause');
+                LOGGER.fatal(error.toString());
+                throw asteria_gaia_1.ErrorUtil.errorToException(error);
             }
         }
     }

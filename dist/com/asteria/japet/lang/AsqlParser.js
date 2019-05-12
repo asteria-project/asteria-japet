@@ -46,18 +46,16 @@ class AsqlParser extends asteria_gaia_1.AbstractAsteriaObject {
                 result = value.substr(1, value.length - 2);
             }
             else {
-                const errorMsg = 'asql string operand must end with a quote character';
-                const error = this.getValueError(errorMsg);
+                const error = this.getValueError('asql string operand must end with a quote character');
                 LOGGER.fatal(error.toString());
-                throw new SyntaxError(errorMsg);
+                throw asteria_gaia_1.ErrorUtil.errorToException(error);
             }
         }
         else {
             if (value.endsWith(AsqlParser.SINGLE_QUOTE) || value.endsWith(AsqlParser.DOUBLE_QUOTE)) {
-                const errorMsg = 'asql number operand must not end with a quote character';
-                const error = this.getValueError(errorMsg);
+                const error = this.getValueError('asql number operand must not end with a quote character');
                 LOGGER.fatal(error.toString());
-                throw new SyntaxError(errorMsg);
+                throw asteria_gaia_1.ErrorUtil.errorToException(error);
             }
             result = Number(value);
         }
