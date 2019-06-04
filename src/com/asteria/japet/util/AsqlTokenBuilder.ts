@@ -21,7 +21,7 @@ export class AsqlTokenBuilder extends AbstractAsteriaObject {
      * @param {AsqlTokenType} type the type of this AsQL token.
      * @param {any} value the value for this AsQL token.
      * 
-     * @return {AsqlToken} a new <code>AsqlToken</code> object.
+     * @returns {AsqlToken} a new <code>AsqlToken</code> object.
      */
     public static build(type: AsqlTokenType, value: any): AsqlToken {
         return new AsqlTokenImpl(type, value);
