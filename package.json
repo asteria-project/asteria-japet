@@ -1,6 +1,6 @@
 {
   "name": "asteria-japet",
-  "version": "0.5.3",
+  "version": "0.5.4",
   "description": "The Japet framework is the implementation of the query language defined by the Astria specification.",
   "main": "dist/com/asteria/japet.index.js",
   "types": "types/japet.d.ts",
@@ -14,8 +14,8 @@
   },
   "homepage": "https://github.com/asteria-japet/asteria-japet#readme",
   "dependencies": {
-    "asteria-gaia": "^0.5.3",
-    "asteria-ouranos": "^0.5.3"
+    "asteria-gaia": "^0.5.4",
+    "asteria-ouranos": "^0.5.4"
   },
   "devDependencies": {
     "grunt": "^1.0.4",
