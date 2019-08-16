@@ -1,14 +1,14 @@
 import 'mocha';
 import { expect, assert } from 'chai';
+import { AsteriaException } from 'asteria-gaia';
 
 // Class to test:
 import { AsqlParser } from '../../../../../src/com/asteria/japet/lang/AsqlParser';
-import { AsqlToken } from '../../../../../src/com/asteria/japet.index';
+import { AsqlToken } from '../../../../../src/com/asteria/japet/lang/AsqlToken';
 
 // Utilities:
 import * as utils from '../../../../../utils/test-utils/utilities/AsqlParserTestUtils';
 import * as tokens from '../../../../../utils/test-utils/utilities/TokenTestUtils';
-import { AsteriaException } from 'asteria-gaia';
 
 // Test:
 describe('AsqlParser class test', ()=> {

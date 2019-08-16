@@ -12,7 +12,7 @@ export class AsqlTokenBuilder extends AbstractAsteriaObject {
      * Create a new <code>AsteriaDataBase</code> instance.
      */
     constructor() {
-        super('com.asteria.japet.lang::AsqlTokenBuilder');
+        super('com.asteria.japet.util::AsqlTokenBuilder');
     }
 
     /**
