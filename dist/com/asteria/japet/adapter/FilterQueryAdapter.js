@@ -6,7 +6,7 @@ const asteria_ouranos_1 = require("asteria-ouranos");
 const LOGGER = asteria_ouranos_1.OuranosLogger.getLogger();
 class FilterQueryAdapter extends asteria_gaia_1.AbstractAsteriaObject {
     constructor() {
-        super('com.asteria.japet.lang::FilterQueryAdapter');
+        super('com.asteria.japet.adapter::FilterQueryAdapter');
         this._condition = null;
         this._filters = null;
         this._filterAcc = null;

@@ -30,10 +30,10 @@ export class FilterQueryAdapter extends AbstractAsteriaObject {
     private _filterAcc: Array<AsqlToken> = null; 
 
     /**
-     * Create a new <code>AsteriaDataBase</code> instance.
+     * Create a new <code>FilterQueryAdapter</code> instance.
      */
     constructor() {
-        super('com.asteria.japet.lang::FilterQueryAdapter');
+        super('com.asteria.japet.adapter::FilterQueryAdapter');
     }
 
     /**
